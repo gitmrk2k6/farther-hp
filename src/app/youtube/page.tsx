@@ -27,7 +27,7 @@ export default function YouTubePage() {
               <p className="text-xs text-muted mb-2">YouTubeチャンネル</p>
               <h3 className="font-serif text-xl font-bold mb-3">小西達也の「歌の枕」</h3>
               <p className="text-sm text-foreground/60 mb-6">
-                ライブ映像や楽曲を配信しています。ぜひチャンネル登録をお願いします。
+                ライブ映像や楽曲を配信しています。<br className="md:hidden" />ぜひチャンネル登録をお願いします。
               </p>
               <div className="border-t border-foreground/10 pt-6 mb-6">
                 <p className="text-sm text-foreground/50 mb-3">小西達也の「歌の枕」によせて。</p>
