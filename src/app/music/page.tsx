@@ -5,6 +5,7 @@ import Image from "next/image";
 import FadeIn from "@/components/FadeIn";
 import SectionTitle from "@/components/SectionTitle";
 import type { ReactNode } from "react";
+import { assetPath } from "@/lib/path";
 
 const albums: {
   title: ReactNode;
@@ -18,7 +19,7 @@ const albums: {
   {
     title: <>しらさぎ<ruby>情歌<rp>(</rp><rt>じょうか</rt><rp>)</rp></ruby></>,
     alt: "しらさぎ情歌",
-    src: "/images/cd-shirasagi.jpg",
+    src: assetPath("/images/cd-shirasagi.jpg"),
     note: "30周年記念の第2弾として、初めてのご当地ソングを作ってみました。\nしかも昭和の歌謡曲仕立てです(笑)\n歌以外にオリジナルキーのカラオケ(Cm)と女性や声の低い男性が歌えるような高さのカラオケ(G♯m)も録音されています。\n覚えて歌ってみてください。歌い終わったら、サンキュー！と叫ばねばなりません(笑)\n\n♪しらさぎ情歌の楽譜が必要な方はYouTubeのページから自由にダウンロードしてください。",
     price: "¥500（税込）",
     tracks: [],
@@ -27,7 +28,7 @@ const albums: {
     title: "夢の残り火",
     subtitle: "30th Anniversary Album",
     alt: "夢の残り火",
-    src: "/images/cd-yume-no-nokoribi.jpg",
+    src: assetPath("/images/cd-yume-no-nokoribi.jpg"),
     price: "¥2,000（税込）",
     tracks: [
       "トイレの小窓",
@@ -44,7 +45,7 @@ const albums: {
   {
     title: "風の吹く坂道",
     alt: "風の吹く坂道",
-    src: "/images/cd-kaze-no-fuku-sakamichi.jpg",
+    src: assetPath("/images/cd-kaze-no-fuku-sakamichi.jpg"),
     price: "¥2,000（税込）",
     tracks: [
       "お兄ちゃんはずるい",
@@ -62,7 +63,7 @@ const albums: {
   {
     title: "小曲集Ⅱ「書簡」",
     alt: "小曲集Ⅱ 書簡",
-    src: "/images/cd-shokyokushu-2.jpg",
+    src: assetPath("/images/cd-shokyokushu-2.jpg"),
     price: "¥1,000（税込）",
     note: "※現在品切れです",
     tracks: [
@@ -76,7 +77,7 @@ const albums: {
   {
     title: "小曲集Ⅰ",
     alt: "小曲集Ⅰ",
-    src: "/images/cd-shokyokushu.jpg",
+    src: assetPath("/images/cd-shokyokushu.jpg"),
     price: "¥1,000（税込）",
     note: "※現在品切れです",
     tracks: [
@@ -89,7 +90,7 @@ const albums: {
   {
     title: "心の響き",
     alt: "心の響き",
-    src: "/images/cd-kokoro-no-hibiki.jpg",
+    src: assetPath("/images/cd-kokoro-no-hibiki.jpg"),
     price: "¥2,000（税込）",
     tracks: [
       "力を抜いて",
@@ -110,7 +111,7 @@ const albums: {
   {
     title: <><ruby>生命<rp>(</rp><rt>いのち</rt><rp>)</rp></ruby>の<ruby>詩<rp>(</rp><rt>うた</rt><rp>)</rp></ruby></>,
     alt: "生命の詩",
-    src: "/images/cd-inochi-no-uta.jpg",
+    src: assetPath("/images/cd-inochi-no-uta.jpg"),
     note: "1995〜99年に発表したシングルCDをまとめたものです",
     price: "¥2,000（税込）",
     tracks: [

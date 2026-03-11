@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import FadeIn from "@/components/FadeIn";
 import { motion } from "framer-motion";
+import { assetPath } from "@/lib/path";
 
 export default function Home() {
   return (
@@ -13,7 +14,7 @@ export default function Home() {
         {/* Background concert photo */}
         <div className="absolute inset-0">
           <Image
-            src="/images/concert-cherry-blossom.jpg"
+            src={assetPath("/images/concert-cherry-blossom.jpg")}
             alt=""
             fill
             className="object-cover"
@@ -33,7 +34,7 @@ export default function Home() {
             >
               <div className="aspect-square rounded-2xl overflow-hidden relative shadow-xl">
                 <Image
-                  src="/images/concert-pink-shirt.jpg"
+                  src={assetPath("/images/concert-pink-shirt.jpg")}
                   alt="小西達也"
                   fill
                   className="object-cover"

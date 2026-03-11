@@ -34,6 +34,7 @@ jobs:
         run: npm run build
         env:
           NEXT_PUBLIC_GAS_WEBHOOK_URL: ${{ secrets.NEXT_PUBLIC_GAS_WEBHOOK_URL }}
+          NEXT_PUBLIC_BASE_PATH: /farther-hp
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import FadeIn from "@/components/FadeIn";
 import SectionTitle from "@/components/SectionTitle";
+import { assetPath } from "@/lib/path";
 
 // TODO: 小西さんに今後のコンサート情報を確認して更新
 const upcomingConcerts: {
@@ -26,7 +27,7 @@ export default function EventsPage() {
           <FadeIn>
             <div className="mt-8 rounded-2xl overflow-hidden relative aspect-[16/7] max-w-3xl mx-auto">
               <Image
-                src="/images/concert-golden-curtain.jpg"
+                src={assetPath("/images/concert-golden-curtain.jpg")}
                 alt="コンサートの様子"
                 fill
                 className="object-cover"

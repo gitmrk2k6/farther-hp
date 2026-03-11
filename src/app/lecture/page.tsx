@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import FadeIn from "@/components/FadeIn";
+import { assetPath } from "@/lib/path";
 
 const lectureFeatures = [
   {
@@ -40,7 +41,7 @@ export default function LecturePage() {
             <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto">
               <div className="rounded-2xl overflow-hidden relative aspect-[4/3]">
                 <Image
-                  src="/images/lecture-school-hall.jpg"
+                  src={assetPath("/images/lecture-school-hall.jpg")}
                   alt="学校での講演会"
                   fill
                   className="object-cover"
@@ -48,7 +49,7 @@ export default function LecturePage() {
               </div>
               <div className="rounded-2xl overflow-hidden relative aspect-[4/3]">
                 <Image
-                  src="/images/lecture-school-gym.jpg"
+                  src={assetPath("/images/lecture-school-gym.jpg")}
                   alt="体育館での講演会"
                   fill
                   className="object-cover"
@@ -56,7 +57,7 @@ export default function LecturePage() {
               </div>
               <div className="rounded-2xl overflow-hidden relative aspect-[4/3]">
                 <Image
-                  src="/images/lecture-children.jpg"
+                  src={assetPath("/images/lecture-children.jpg")}
                   alt="子ども達への講演"
                   fill
                   className="object-cover"

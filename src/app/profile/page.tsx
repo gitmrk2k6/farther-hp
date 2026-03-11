@@ -3,6 +3,7 @@
 import Image from "next/image";
 import FadeIn from "@/components/FadeIn";
 import SectionTitle from "@/components/SectionTitle";
+import { assetPath } from "@/lib/path";
 
 export default function ProfilePage() {
   return (
@@ -23,7 +24,7 @@ export default function ProfilePage() {
               <div className="w-full md:w-2/5 flex-shrink-0">
                 <div className="aspect-[3/4] bg-section-alt rounded-2xl overflow-hidden relative">
                   <Image
-                    src="/images/portrait-outdoor.jpg"
+                    src={assetPath("/images/portrait-outdoor.jpg")}
                     alt="小西達也"
                     fill
                     className="object-cover"

@@ -3,24 +3,25 @@
 import Image from "next/image";
 import FadeIn from "@/components/FadeIn";
 import SectionTitle from "@/components/SectionTitle";
+import { assetPath } from "@/lib/path";
 
 const photos = [
-  { src: "/images/concert-rainbow.jpg", alt: "コンサート" },
-  { src: "/images/concert-green.jpg", alt: "コンサート" },
-  { src: "/images/concert-old-photo.jpg", alt: "コンサート" },
-  { src: "/images/concert-blue-curtain.jpg", alt: "コンサート" },
-  { src: "/images/concert-red-spotlight.jpg", alt: "コンサート" },
-  { src: "/images/concert-purple-stage.jpg", alt: "コンサート" },
-  { src: "/images/concert-dramatic.jpg", alt: "コンサート" },
-  { src: "/images/concert-warm-closeup.jpg", alt: "コンサート" },
-  { src: "/images/concert-purple-smile.jpg", alt: "コンサート" },
-  { src: "/images/concert-singing.jpg", alt: "コンサート" },
-  { src: "/images/concert-blue-medium.jpg", alt: "コンサート" },
-  { src: "/images/concert-side-profile.jpg", alt: "コンサート" },
-  { src: "/images/concert-blue.jpg", alt: "コンサート" },
-  { src: "/images/concert-orange.jpg", alt: "コンサート" },
-  { src: "/images/concert-side-dark.jpg", alt: "コンサート" },
-  { src: "/images/lecture-venue.jpg", alt: "講演会" },
+  { src: assetPath("/images/concert-rainbow.jpg"), alt: "コンサート" },
+  { src: assetPath("/images/concert-green.jpg"), alt: "コンサート" },
+  { src: assetPath("/images/concert-old-photo.jpg"), alt: "コンサート" },
+  { src: assetPath("/images/concert-blue-curtain.jpg"), alt: "コンサート" },
+  { src: assetPath("/images/concert-red-spotlight.jpg"), alt: "コンサート" },
+  { src: assetPath("/images/concert-purple-stage.jpg"), alt: "コンサート" },
+  { src: assetPath("/images/concert-dramatic.jpg"), alt: "コンサート" },
+  { src: assetPath("/images/concert-warm-closeup.jpg"), alt: "コンサート" },
+  { src: assetPath("/images/concert-purple-smile.jpg"), alt: "コンサート" },
+  { src: assetPath("/images/concert-singing.jpg"), alt: "コンサート" },
+  { src: assetPath("/images/concert-blue-medium.jpg"), alt: "コンサート" },
+  { src: assetPath("/images/concert-side-profile.jpg"), alt: "コンサート" },
+  { src: assetPath("/images/concert-blue.jpg"), alt: "コンサート" },
+  { src: assetPath("/images/concert-orange.jpg"), alt: "コンサート" },
+  { src: assetPath("/images/concert-side-dark.jpg"), alt: "コンサート" },
+  { src: assetPath("/images/lecture-venue.jpg"), alt: "講演会" },
 ];
 
 export default function GalleryPage() {

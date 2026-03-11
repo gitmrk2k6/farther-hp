@@ -2,6 +2,7 @@
 
 import FadeIn from "@/components/FadeIn";
 import SectionTitle from "@/components/SectionTitle";
+import { assetPath } from "@/lib/path";
 
 const youtubeVideos = [
   { id: "az4zlAqe4ig", title: "しらさぎ情歌" },
@@ -70,7 +71,7 @@ export default function YouTubePage() {
                     <p className="font-medium text-sm">カラオケ（Cm）</p>
                     <p className="text-xs text-foreground/60 mt-0.5">オリジナルカラオケ</p>
                     <a
-                      href="/pdf/ShirasagiCm.pdf"
+                      href={assetPath("/pdf/ShirasagiCm.pdf")}
                       download
                       className="inline-block mt-2 text-sm text-primary hover:text-accent transition-colors underline"
                     >
@@ -82,7 +83,7 @@ export default function YouTubePage() {
                     <p className="font-medium text-sm">カラオケ（G♯m）</p>
                     <p className="text-xs text-foreground/60 mt-0.5">女性や声の低い男性が歌えるような高さです</p>
                     <a
-                      href="/pdf/ShirasagiG%23m_MeloOctDown.pdf"
+                      href={assetPath("/pdf/ShirasagiG%23m_MeloOctDown.pdf")}
                       download
                       className="inline-block mt-2 text-sm text-primary hover:text-accent transition-colors underline"
                     >
