@@ -119,7 +119,7 @@ export default function LecturePage() {
       <section className="py-16 px-4">
         <div className="max-w-3xl mx-auto">
           <FadeIn>
-            <h3 className="font-serif text-lg md:text-2xl font-bold mb-6 text-center">
+            <h3 className="font-serif text-[15px] md:text-2xl font-bold mb-6 text-center">
               ホール・体育館のコンサート・講演会について
             </h3>
             <div className="space-y-4 text-foreground/70 leading-relaxed">
@@ -138,7 +138,7 @@ export default function LecturePage() {
       <section className="py-16 px-4 bg-section-alt">
         <div className="max-w-3xl mx-auto">
           <FadeIn>
-            <h3 className="font-serif text-lg md:text-2xl font-bold mb-6 text-center">
+            <h3 className="font-serif text-[15px] md:text-2xl font-bold mb-6 text-center">
               小規模のコンサート・講演会について
             </h3>
             <div className="space-y-4 text-foreground/70 leading-relaxed">
