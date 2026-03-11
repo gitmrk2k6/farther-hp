@@ -1,65 +1,224 @@
+"use client";
+
+import Link from "next/link";
 import Image from "next/image";
+import FadeIn from "@/components/FadeIn";
+import { motion } from "framer-motion";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      {/* Hero Section */}
+      <section className="relative overflow-hidden pt-16">
+        {/* Background concert photo */}
+        <div className="absolute inset-0">
+          <Image
+            src="/images/concert-cherry-blossom.jpg"
+            alt=""
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/75 to-background" />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <div className="relative z-10 px-4 max-w-5xl mx-auto w-full py-14 md:py-20">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
+            {/* Photo */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="w-52 md:w-64 flex-shrink-0"
+            >
+              <div className="aspect-square rounded-2xl overflow-hidden relative shadow-xl">
+                <Image
+                  src="/images/concert-pink-shirt.jpg"
+                  alt="小西達也"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
+            </motion.div>
+
+            {/* Text */}
+            <div className="text-center md:text-left">
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="text-foreground/60 text-sm md:text-base tracking-[0.3em] mb-3"
+              >
+                シンガーソングライター
+              </motion.p>
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                className="font-serif text-5xl md:text-7xl font-bold text-foreground mb-5"
+              >
+                小西 達也
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+                className="font-serif text-2xl md:text-4xl text-primary font-bold tracking-wider"
+              >
+                優しさの種をあなたの心に
+              </motion.p>
+            </div>
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* 最新情報 */}
+      <section className="py-14 px-4 bg-section-alt">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="font-serif text-2xl md:text-3xl font-bold text-center mb-3">
+            最新情報
+          </h2>
+          <div className="mt-3 mx-auto w-16 h-0.5 bg-primary/40 rounded-full mb-8" />
+          <FadeIn>
+            <div className="space-y-4">
+              {[
+                {
+                  date: "2026.03.08",
+                  category: "ブログ",
+                  title: "ホームページをリニューアルしました",
+                  href: "/blog/2026-03-08-first-post",
+                },
+              ].map((news, i) => (
+                <Link
+                  key={i}
+                  href={news.href}
+                  className="block bg-card-bg rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+                    <div className="flex items-center gap-3 flex-shrink-0">
+                      <span className="text-sm text-muted">{news.date}</span>
+                      <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">
+                        {news.category}
+                      </span>
+                    </div>
+                    <h3 className="font-medium text-foreground">{news.title}</h3>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* プロフィール概要 */}
+      <section className="py-14 px-4">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="font-serif text-2xl md:text-3xl font-bold text-center mb-3">
+            プロフィール
+          </h2>
+          <div className="mt-3 mx-auto w-16 h-0.5 bg-primary/40 rounded-full mb-8" />
+          <FadeIn>
+            <div className="bg-card-bg rounded-2xl p-8 md:p-12 shadow-sm text-center">
+              <p className="text-foreground/70 leading-relaxed text-lg">
+                1962年、兵庫県豊岡市生まれ。
+                先天性骨形成不全症により幼少から車椅子で生活しながら、
+                12歳でギターを手にし、現在は全国各地で
+                コンサートや講演活動を行っています。
+              </p>
+              <Link
+                href="/profile"
+                className="inline-block mt-6 text-primary hover:text-accent transition-colors font-medium"
+              >
+                もっと詳しく →
+              </Link>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* 講演会のお問い合わせ */}
+      <section className="py-14 px-4 bg-section-alt">
+        <div className="max-w-4xl mx-auto">
+          <FadeIn>
+            <div className="bg-card-bg rounded-2xl p-8 md:p-10 shadow-sm">
+              <div className="flex flex-col md:flex-row gap-6 items-center">
+                <div className="flex-1 text-center md:text-left">
+                  <h2 className="font-bold text-xl mb-2">講演会について</h2>
+                  <p className="text-sm text-foreground/60 leading-relaxed">
+                    歌とトークを織り交ぜた独自のスタイルで、
+                    学校、福祉施設、企業研修、文化祭など
+                    幅広い場で講演を行っています。
+                  </p>
+                </div>
+                <Link
+                  href="/lecture"
+                  className="bg-primary text-white px-8 py-3 rounded-full hover:bg-accent transition-colors font-medium whitespace-nowrap"
+                >
+                  講演会の詳細を見る
+                </Link>
+              </div>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* ブログ */}
+      <section className="py-14 px-4">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="font-serif text-2xl md:text-3xl font-bold text-center mb-3">
+            ブログ
+          </h2>
+          <div className="mt-3 mx-auto w-16 h-0.5 bg-primary/40 rounded-full mb-8" />
+          <FadeIn>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {[1, 2].map((i) => (
+                <div
+                  key={i}
+                  className="bg-card-bg rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <p className="text-xs text-muted mb-2">2026.03.08</p>
+                  <h3 className="font-bold text-foreground mb-2">
+                    ※ ブログタイトルが入ります
+                  </h3>
+                  <p className="text-sm text-foreground/60">
+                    ※ ブログの概要テキストが入ります...
+                  </p>
+                </div>
+              ))}
+            </div>
+          </FadeIn>
+          <FadeIn delay={0.2} className="text-center mt-8">
+            <Link
+              href="/blog"
+              className="text-primary hover:text-accent transition-colors font-medium"
+            >
+              すべての記事を見る →
+            </Link>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* お問い合わせ */}
+      <section className="py-14 px-4 bg-section-alt">
+        <div className="max-w-2xl mx-auto text-center">
+          <FadeIn>
+            <h2 className="font-serif text-2xl font-bold mb-4">
+              お問い合わせ
+            </h2>
+            <p className="text-foreground/60 mb-8">
+              講演会・コンサートのご依頼、その他ご質問など
+              お気軽にご連絡ください。
+            </p>
+            <Link
+              href="/contact"
+              className="inline-block border border-primary text-primary px-10 py-3 rounded-full hover:bg-primary hover:text-white transition-colors font-medium"
+            >
+              お問い合わせはこちら
+            </Link>
+          </FadeIn>
+        </div>
+      </section>
+    </>
   );
 }
