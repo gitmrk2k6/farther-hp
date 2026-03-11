@@ -129,9 +129,6 @@ export default function LecturePage() {
               <p>
                 会の規模によって（広さ、場所、人数）機材の量やスタッフの人数が異なります。その場合、準備に必要な時間や費用にもちがいが発生しますので、その都度どのような会であるかを細かくお聞かせ下さい。尚、照明、美術についてもご要望がありましたら承ります。
               </p>
-              <p className="text-primary font-medium">
-                くわしくは、直接お電話にて・・・。
-              </p>
             </div>
           </FadeIn>
         </div>
@@ -147,9 +144,6 @@ export default function LecturePage() {
             <div className="space-y-4 text-foreground/70 leading-relaxed">
               <p>
                 人数が３０〜５０人程度の小さな会も行っています。ちょっとしたサークルの集会、学習会、あるいは会社、喫茶店やお寺さんなど・・・。このような会はなるべく費用がかからないように、小西が簡単な音響機材を車に積み込んで、自ら運転して一人で現地に伺っています。そのために荷物の積み降ろしなど、主催者の方にお手伝いして頂かなければならないこともありますけど・・・。そんな感じでよければ、いつでも呼んで下さい。
-              </p>
-              <p className="text-primary font-medium">
-                くわしくは直接お電話にて・・・。
               </p>
             </div>
           </FadeIn>
