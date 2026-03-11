@@ -1,9 +1,11 @@
+import type { ReactNode } from "react";
+
 export default function SectionTitle({
   title,
   subtitle,
 }: {
   title: string;
-  subtitle?: string;
+  subtitle?: ReactNode;
 }) {
   return (
     <div className="text-center">

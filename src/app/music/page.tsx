@@ -139,7 +139,7 @@ export default function MusicPage() {
       {/* Hero */}
       <section className="py-14 px-4 bg-section-alt">
         <div className="max-w-4xl mx-auto text-center">
-          <SectionTitle title="CD" subtitle="在庫がなくなり次第販売は終了します。その際はご了承ください。" />
+          <SectionTitle title="CD" subtitle={<>在庫がなくなり次第販売は終了します。<br />その際はご了承ください。</>} />
         </div>
       </section>
 

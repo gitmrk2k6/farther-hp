@@ -31,7 +31,7 @@ export default function YouTubePage() {
               </p>
               <div className="border-t border-foreground/10 pt-6 mb-6">
                 <p className="text-sm text-foreground/50 mb-3">小西達也の「歌の枕」によせて。</p>
-                <p className="text-sm text-foreground/70 leading-relaxed max-w-lg mx-auto whitespace-pre-line">{`どこにでもあるような、探してみるとどこにもない…\nそんな歌を歌えたらと思います。\n１行目のフレーズで物語の風景が浮かぶように。\n１冊の短編小説を読み終えるように…。\nそしてあなたとばったり会えたなら、なほよろし。`}</p>
+                <p className="text-sm text-foreground/70 leading-relaxed max-w-lg mx-auto whitespace-pre-line">{`どこにでもあるような、\n探してみるとどこにもない…\nそんな歌を歌えたらと思います。\n１行目のフレーズで物語の風景が浮かぶように。\n１冊の短編小説を読み終えるように…。\nそしてあなたとばったり会えたなら、\nなほよろし。`}</p>
               </div>
               <a
                 href="https://www.youtube.com/@tatsuya_konishi"
