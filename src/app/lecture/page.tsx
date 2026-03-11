@@ -166,7 +166,7 @@ export default function LecturePage() {
                 },
                 {
                   step: "2",
-                  title: "お打ち合わせ",
+                  title: "打ち合わせ",
                   text: "ご要望に合わせた講演内容をご提案いたします。テーマや時間、演奏曲目など柔軟に対応いたします。",
                 },
                 {
