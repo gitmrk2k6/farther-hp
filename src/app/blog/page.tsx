@@ -1,10 +1,19 @@
 import Link from "next/link";
 import { getAllPosts } from "@/lib/blog";
+import SectionTitle from "@/components/SectionTitle";
 
 export const metadata = {
   title: "ブログ",
   description: "小西達也のブログ。日々の活動や想い、近況、ちょっとしたぼやきなど。",
 };
+
+function formatDate(dateStr: string) {
+  const d = new Date(dateStr);
+  const year = d.getFullYear();
+  const month = d.getMonth() + 1;
+  const day = d.getDate();
+  return `${year}年${month}月${day}日`;
+}
 
 export default function BlogPage() {
   const posts = getAllPosts();
@@ -13,13 +22,10 @@ export default function BlogPage() {
     <div className="pt-24 pb-20">
       {/* Hero */}
       <section className="py-14 px-4 bg-section-alt">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-4">
-            ブログ
-          </h1>
-          <p className="text-foreground/60 text-sm md:text-base leading-relaxed">日々の活動や想い、近況、ちょっとしたぼやきなど</p>
-          <div className="mt-5 mx-auto w-16 h-0.5 bg-primary/40 rounded-full" />
-        </div>
+        <SectionTitle
+          title="ブログ"
+          subtitle="日々の活動や想い、近況、ちょっとしたぼやきなど"
+        />
       </section>
 
       {/* Blog List */}
@@ -34,9 +40,13 @@ export default function BlogPage() {
               {posts.map((post) => (
                 <Link key={post.slug} href={`/blog/${post.slug}`}>
                   <article className="bg-card-bg rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow">
-                    <p className="text-xs text-muted mb-2">{post.date}</p>
+                    <p className="text-xs text-muted mb-2">
+                      {formatDate(post.date)}
+                    </p>
                     <h2 className="font-bold text-lg mb-2">{post.title}</h2>
-                    <p className="text-sm text-foreground/60">{post.excerpt}</p>
+                    <p className="text-sm text-foreground/60 line-clamp-2">
+                      {post.excerpt}
+                    </p>
                     {post.tags && post.tags.length > 0 && (
                       <div className="mt-3 flex gap-2 flex-wrap">
                         {post.tags.map((tag) => (

@@ -1,6 +1,8 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { remark } from "remark";
+import html from "remark-html";
 
 const BLOG_DIR = path.join(process.cwd(), "src/content/blog");
 
@@ -10,6 +12,7 @@ export interface BlogPost {
   date: string;
   excerpt: string;
   content: string;
+  contentHtml?: string;
   tags?: string[];
 }
 
@@ -40,4 +43,17 @@ export function getAllPosts(): BlogPost[] {
 export function getPostBySlug(slug: string): BlogPost | null {
   const posts = getAllPosts();
   return posts.find((p) => p.slug === slug) || null;
+}
+
+export async function getPostBySlugWithHtml(
+  slug: string
+): Promise<BlogPost | null> {
+  const post = getPostBySlug(slug);
+  if (!post) return null;
+
+  const result = await remark().use(html).process(post.content);
+  return {
+    ...post,
+    contentHtml: result.toString(),
+  };
 }
