@@ -120,7 +120,7 @@ export default function LecturePage() {
         <div className="max-w-3xl mx-auto">
           <FadeIn>
             <h3 className="font-serif text-lg md:text-2xl font-bold mb-6 text-center">
-              ホール・体育館のコンサート・講演会
+              ホール・体育館のコンサート・講演会について
             </h3>
             <div className="space-y-4 text-foreground/70 leading-relaxed">
               <p>
@@ -139,7 +139,7 @@ export default function LecturePage() {
         <div className="max-w-3xl mx-auto">
           <FadeIn>
             <h3 className="font-serif text-lg md:text-2xl font-bold mb-6 text-center">
-              小規模のコンサート・講演会
+              小規模のコンサート・講演会について
             </h3>
             <div className="space-y-4 text-foreground/70 leading-relaxed">
               <p>
