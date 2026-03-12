@@ -39,7 +39,7 @@ export default function BlogPage() {
             <div className="space-y-6">
               {posts.map((post) => (
                 <Link key={post.slug} href={`/blog/${post.slug}`}>
-                  <article className="bg-card-bg rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow">
+                  <article className="bg-card-bg rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow border border-primary/15">
                     <p className="text-xs text-muted mb-2">
                       {formatDate(post.date)}
                     </p>
