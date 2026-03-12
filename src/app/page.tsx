@@ -36,7 +36,7 @@ export default async function Home() {
   const youtubeNews: NewsItem[] = videos.map((video) => ({
     date: formatDisplayDate(video.published),
     category: "YouTube",
-    title: video.title,
+    title: `「${video.title}」が公開されました`,
     href: `https://www.youtube.com/watch?v=${video.id}`,
     pinned: false,
   }));
