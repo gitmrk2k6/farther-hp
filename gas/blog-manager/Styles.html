@@ -1,0 +1,468 @@
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', sans-serif;
+    background-color: #FDF8F3;
+    color: #333;
+    line-height: 1.6;
+  }
+
+  /* ヘッダー */
+  .header {
+    background-color: #1a1a2e;
+    color: #D4AF37;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header h1 {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .header button {
+    background: none;
+    border: 1px solid #D4AF37;
+    color: #D4AF37;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+
+  /* ログイン画面 */
+  .login-container {
+    max-width: 360px;
+    margin: 80px auto;
+    padding: 32px 24px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    text-align: center;
+  }
+
+  .login-container h2 {
+    color: #1a1a2e;
+    margin-bottom: 24px;
+    font-size: 20px;
+  }
+
+  .login-container input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+
+  .login-container .btn-primary {
+    width: 100%;
+  }
+
+  /* ボタン共通 */
+  .btn-primary {
+    background-color: #B8860B;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .btn-secondary {
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .btn-success {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  /* 記事一覧 */
+  .post-list {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 16px;
+  }
+
+  .post-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .post-list-header h2 {
+    font-size: 18px;
+    color: #1a1a2e;
+  }
+
+  .post-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 12px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+
+  .post-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+  }
+
+  .post-card h3 {
+    font-size: 16px;
+    color: #1a1a2e;
+    flex: 1;
+    margin-right: 8px;
+  }
+
+  .status-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .status-draft {
+    background-color: #ffc107;
+    color: #333;
+  }
+
+  .status-published {
+    background-color: #28a745;
+    color: #fff;
+  }
+
+  .post-card .date {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 8px;
+  }
+
+  .post-card .excerpt {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 12px;
+  }
+
+  .post-card-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .post-card-actions button {
+    padding: 8px 16px;
+    font-size: 13px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  /* エディタ */
+  .editor {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 16px;
+  }
+
+  .editor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .editor-header h2 {
+    font-size: 18px;
+    color: #1a1a2e;
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 4px;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    background: #fff;
+  }
+
+  .form-group textarea {
+    min-height: 300px;
+    font-family: 'SFMono-Regular', 'Consolas', 'Liberation Mono', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    resize: vertical;
+  }
+
+  .editor-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+    padding-bottom: 32px;
+  }
+
+  .editor-actions button {
+    flex: 1;
+    min-width: 120px;
+  }
+
+  /* ツールバー */
+  .toolbar {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    padding: 8px;
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-bottom: none;
+    border-radius: 6px 6px 0 0;
+  }
+
+  .toolbar-btn {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #333;
+    cursor: pointer;
+    min-height: 40px;
+    touch-action: manipulation;
+  }
+
+  .toolbar-btn:active {
+    background: #e8e8e8;
+  }
+
+  .toolbar-btn-image {
+    background: #B8860B;
+    color: #fff;
+    border-color: #B8860B;
+  }
+
+  .toolbar-btn-image:active {
+    background: #9a7209;
+  }
+
+  .form-group .toolbar + textarea {
+    border-radius: 0 0 6px 6px;
+  }
+
+  /* プレビュー */
+  .btn-preview {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    background: #1a1a2e;
+    color: #D4AF37;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .btn-preview:active {
+    background: #2a2a4e;
+  }
+
+  .preview-area {
+    margin-top: 8px;
+    padding: 16px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #333;
+  }
+
+  .preview-area h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 16px 0 8px;
+    color: #1a1a2e;
+  }
+
+  .preview-area h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 14px 0 6px;
+    color: #1a1a2e;
+  }
+
+  .preview-area ul {
+    padding-left: 20px;
+    margin: 8px 0;
+  }
+
+  .preview-area li {
+    margin-bottom: 4px;
+  }
+
+  .preview-area img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin: 8px 0;
+  }
+
+  .preview-area p {
+    margin-bottom: 8px;
+  }
+
+  /* ローディング */
+  .loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+
+  .loading-spinner {
+    background: #fff;
+    padding: 24px 32px;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #333;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  }
+
+  /* メッセージ */
+  .message {
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
+
+  .message-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+  }
+
+  .message-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+  }
+
+  /* 確認ダイアログ */
+  .dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 998;
+  }
+
+  .dialog {
+    background: #fff;
+    border-radius: 8px;
+    padding: 24px;
+    max-width: 320px;
+    width: 90%;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+
+  .dialog h3 {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .dialog p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+  }
+
+  .dialog-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+  }
+
+  /* 空状態 */
+  .empty-state {
+    text-align: center;
+    padding: 48px 16px;
+    color: #888;
+  }
+
+  .empty-state p {
+    font-size: 15px;
+    margin-bottom: 16px;
+  }
+</style>

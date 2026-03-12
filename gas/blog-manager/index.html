@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <?!= include('Styles'); ?>
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <div class="header" id="app-header" style="display:none;">
+    <h1>ブログ管理</h1>
+    <button onclick="handleLogout()">ログアウト</button>
+  </div>
+
+  <!-- メッセージエリア -->
+  <div id="message-area" style="max-width:640px;margin:8px auto 0;padding:0 16px;"></div>
+
+  <!-- ログイン画面 -->
+  <div id="login-view">
+    <div class="login-container">
+      <h2>ブログ管理</h2>
+      <input type="password" id="password" placeholder="パスワードを入力" onkeydown="handlePasswordKeydown(event)">
+      <button class="btn-primary" onclick="handleLogin()">ログイン</button>
+    </div>
+  </div>
+
+  <!-- 記事一覧画面 -->
+  <div id="list-view" style="display:none;">
+    <div class="post-list">
+      <div class="post-list-header">
+        <h2>記事一覧</h2>
+        <button class="btn-primary" onclick="showEditor()">+ 新しい記事</button>
+      </div>
+      <div id="post-list-container"></div>
+    </div>
+  </div>
+
+  <!-- エディタ画面 -->
+  <div id="editor-view" style="display:none;">
+    <div class="editor">
+      <div class="editor-header">
+        <h2 id="editor-title">新しい記事</h2>
+        <button class="btn-secondary" onclick="showPostList()">← 戻る</button>
+      </div>
+
+      <div class="form-group">
+        <label for="post-title">タイトル</label>
+        <input type="text" id="post-title" placeholder="記事のタイトル">
+      </div>
+
+      <div class="form-group">
+        <label for="post-date">日付</label>
+        <input type="date" id="post-date">
+      </div>
+
+      <div class="form-group">
+        <label for="post-excerpt">概要（一覧に表示される短い説明）</label>
+        <input type="text" id="post-excerpt" placeholder="記事の概要を入力">
+      </div>
+
+      <div class="form-group">
+        <label for="post-tags">タグ（カンマ区切り）</label>
+        <input type="text" id="post-tags" placeholder="例: お知らせ, コンサート">
+      </div>
+
+      <div class="form-group">
+        <label for="post-content">本文</label>
+        <div class="toolbar">
+          <button type="button" class="toolbar-btn" onclick="insertMarkdown('h1')" title="大見出し">見出し大</button>
+          <button type="button" class="toolbar-btn" onclick="insertMarkdown('h2')" title="小見出し">見出し小</button>
+          <button type="button" class="toolbar-btn" onclick="insertMarkdown('bold')" title="太字">太字</button>
+          <button type="button" class="toolbar-btn" onclick="insertMarkdown('list')" title="箇条書き">箇条書き</button>
+          <button type="button" class="toolbar-btn toolbar-btn-image" onclick="handleImageUpload()" title="画像">画像</button>
+          <input type="file" id="image-input" accept="image/*" onchange="onImageSelected(this)" style="display:none;">
+        </div>
+        <textarea id="post-content" placeholder="記事の本文を入力"></textarea>
+        <button type="button" class="btn-preview" onclick="togglePreview()">プレビュー</button>
+        <div id="preview-area" class="preview-area" style="display:none;"></div>
+      </div>
+
+      <div class="editor-actions">
+        <button class="btn-secondary" onclick="handleSaveDraft()">下書き保存</button>
+        <button class="btn-success" id="btn-publish" onclick="handlePublish()">公開する</button>
+        <button class="btn-danger" id="btn-unpublish" onclick="handleUnpublish()" style="display:none;">非公開にする</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ローディングオーバーレイ -->
+  <div class="loading-overlay" id="loading-overlay" style="display:none;">
+    <div class="loading-spinner" id="loading-text">処理中...</div>
+  </div>
+
+  <!-- 確認ダイアログ -->
+  <div class="dialog-overlay" id="dialog-overlay" style="display:none;">
+    <div class="dialog">
+      <h3 id="dialog-title"></h3>
+      <p id="dialog-message"></p>
+      <div class="dialog-actions">
+        <button class="btn-secondary" onclick="window._dialogCancel()">キャンセル</button>
+        <button class="btn-primary" onclick="window._dialogConfirm()">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <?!= include('JavaScript'); ?>
+</body>
+</html>

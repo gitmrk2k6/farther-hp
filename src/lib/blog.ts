@@ -14,6 +14,7 @@ export interface BlogPost {
   content: string;
   contentHtml?: string;
   tags?: string[];
+  pinUntil?: string;
 }
 
 export function getAllPosts(): BlogPost[] {
@@ -34,6 +35,7 @@ export function getAllPosts(): BlogPost[] {
       excerpt: data.excerpt || content.slice(0, 120) + "...",
       content,
       tags: data.tags || [],
+      pinUntil: data.pinUntil || "",
     };
   });
 

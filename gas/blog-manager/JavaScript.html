@@ -1,0 +1,615 @@
+<script>
+  // --- 状態管理 ---
+  var state = {
+    token: localStorage.getItem('blog_token') || '',
+    currentView: 'login', // login, list, editor
+    posts: [],
+    editingPost: null,
+    loading: false
+  };
+
+  // --- 初期化 ---
+  window.onload = function() {
+    if (state.token) {
+      showLoading('認証確認中...');
+      google.script.run
+        .withSuccessHandler(function(valid) {
+          hideLoading();
+          if (valid) {
+            showPostList();
+          } else {
+            state.token = '';
+            localStorage.removeItem('blog_token');
+            showLogin();
+          }
+        })
+        .withFailureHandler(function(err) {
+          hideLoading();
+          state.token = '';
+          localStorage.removeItem('blog_token');
+          showLogin();
+        })
+        .validateSession(state.token);
+    } else {
+      showLogin();
+    }
+  };
+
+  // --- ログイン ---
+  function handleLogin() {
+    var password = document.getElementById('password').value;
+    if (!password) return;
+
+    showLoading('ログイン中...');
+    google.script.run
+      .withSuccessHandler(function(result) {
+        hideLoading();
+        if (result.success) {
+          state.token = result.token;
+          localStorage.setItem('blog_token', result.token);
+          showPostList();
+        } else {
+          showMessage(result.error, 'error');
+        }
+      })
+      .withFailureHandler(function(err) {
+        hideLoading();
+        showMessage('ログインに失敗しました', 'error');
+      })
+      .login(password);
+  }
+
+  function handleLogout() {
+    google.script.run.logout(state.token);
+    state.token = '';
+    localStorage.removeItem('blog_token');
+    showLogin();
+  }
+
+  // --- 画面遷移 ---
+  function showLogin() {
+    state.currentView = 'login';
+    document.getElementById('app-header').style.display = 'none';
+    document.getElementById('login-view').style.display = 'block';
+    document.getElementById('list-view').style.display = 'none';
+    document.getElementById('editor-view').style.display = 'none';
+  }
+
+  function showPostList() {
+    state.currentView = 'list';
+    document.getElementById('app-header').style.display = 'flex';
+    document.getElementById('login-view').style.display = 'none';
+    document.getElementById('list-view').style.display = 'block';
+    document.getElementById('editor-view').style.display = 'none';
+    loadPosts();
+  }
+
+  function showEditor(postId) {
+    state.currentView = 'editor';
+    document.getElementById('login-view').style.display = 'none';
+    document.getElementById('list-view').style.display = 'none';
+    document.getElementById('editor-view').style.display = 'block';
+    document.getElementById('message-area').innerHTML = '';
+
+    if (postId) {
+      showLoading('記事を読み込み中...');
+      google.script.run
+        .withSuccessHandler(function(result) {
+          hideLoading();
+          if (result.success) {
+            state.editingPost = result.post;
+            populateEditor(result.post);
+          } else {
+            showMessage(result.error, 'error');
+            showPostList();
+          }
+        })
+        .withFailureHandler(function(err) {
+          hideLoading();
+          showMessage('記事の読み込みに失敗しました', 'error');
+        })
+        .getPost(state.token, postId);
+    } else {
+      state.editingPost = null;
+      clearEditor();
+    }
+  }
+
+  // --- 記事一覧 ---
+  function loadPosts() {
+    showLoading('記事を読み込み中...');
+    google.script.run
+      .withSuccessHandler(function(result) {
+        hideLoading();
+        if (result.success) {
+          state.posts = result.posts;
+          renderPostList(result.posts);
+        } else {
+          showMessage(result.error, 'error');
+        }
+      })
+      .withFailureHandler(function(err) {
+        hideLoading();
+        showMessage('記事の読み込みに失敗しました', 'error');
+      })
+      .getAllPosts(state.token);
+  }
+
+  function renderPostList(posts) {
+    var container = document.getElementById('post-list-container');
+
+    if (posts.length === 0) {
+      container.innerHTML = '<div class="empty-state"><p>まだ記事がありません</p>' +
+        '<button class="btn-primary" onclick="showEditor()">最初の記事を書く</button></div>';
+      return;
+    }
+
+    var html = '';
+    for (var i = 0; i < posts.length; i++) {
+      var p = posts[i];
+      var statusClass = p.status === 'published' ? 'status-published' : 'status-draft';
+      var statusText = p.status === 'published' ? '公開中' : '下書き';
+
+      html += '<div class="post-card">' +
+        '<div class="post-card-header">' +
+          '<h3>' + escapeHtml(p.title || '（無題）') + '</h3>' +
+          '<span class="status-badge ' + statusClass + '">' + statusText + '</span>' +
+        '</div>' +
+        '<div class="date">' + formatDate(p.date) + '</div>' +
+        (p.excerpt ? '<div class="excerpt">' + escapeHtml(p.excerpt) + '</div>' : '') +
+        '<div class="post-card-actions">' +
+          '<button class="btn-secondary" onclick="showEditor(\'' + p.id + '\')">編集</button>' +
+          '<button class="btn-danger" onclick="confirmDelete(\'' + p.id + '\', \'' + escapeHtml(p.title) + '\')">削除</button>' +
+        '</div>' +
+      '</div>';
+    }
+    container.innerHTML = html;
+  }
+
+  // --- エディタ ---
+  function populateEditor(post) {
+    document.getElementById('editor-title').textContent = '記事を編集';
+    document.getElementById('post-title').value = post.title || '';
+    document.getElementById('post-date').value = post.date || '';
+    document.getElementById('post-excerpt').value = post.excerpt || '';
+    document.getElementById('post-tags').value = post.tags || '';
+    document.getElementById('post-content').value = post.content || '';
+
+    // 公開済みなら「更新して再公開」ボタンを表示
+    var publishBtn = document.getElementById('btn-publish');
+    if (post.status === 'published') {
+      publishBtn.textContent = '更新して再公開';
+    } else {
+      publishBtn.textContent = '公開する';
+    }
+
+    // 公開済みなら「非公開にする」ボタンを表示
+    var unpublishBtn = document.getElementById('btn-unpublish');
+    unpublishBtn.style.display = post.status === 'published' ? 'block' : 'none';
+  }
+
+  function clearEditor() {
+    document.getElementById('editor-title').textContent = '新しい記事';
+    document.getElementById('post-title').value = '';
+    document.getElementById('post-date').value = getTodayString();
+    document.getElementById('post-excerpt').value = '';
+    document.getElementById('post-tags').value = '';
+    document.getElementById('post-content').value = '';
+    document.getElementById('btn-publish').textContent = '公開する';
+    document.getElementById('btn-unpublish').style.display = 'none';
+  }
+
+  function getEditorData() {
+    return {
+      id: state.editingPost ? state.editingPost.id : null,
+      title: document.getElementById('post-title').value,
+      date: document.getElementById('post-date').value,
+      excerpt: document.getElementById('post-excerpt').value,
+      tags: document.getElementById('post-tags').value,
+      content: document.getElementById('post-content').value
+    };
+  }
+
+  function handleSaveDraft() {
+    var data = getEditorData();
+    if (!data.title) {
+      showMessage('タイトルを入力してください', 'error');
+      return;
+    }
+
+    showLoading('下書き保存中...');
+    google.script.run
+      .withSuccessHandler(function(result) {
+        hideLoading();
+        if (result.success) {
+          if (!state.editingPost) {
+            state.editingPost = { id: result.id };
+          }
+          showMessage('下書きを保存しました', 'success');
+        } else {
+          showMessage(result.error, 'error');
+        }
+      })
+      .withFailureHandler(function(err) {
+        hideLoading();
+        showMessage('保存に失敗しました', 'error');
+      })
+      .savePost(state.token, data);
+  }
+
+  function handlePublish() {
+    var data = getEditorData();
+    if (!data.title) {
+      showMessage('タイトルを入力してください', 'error');
+      return;
+    }
+    if (!data.content) {
+      showMessage('本文を入力してください', 'error');
+      return;
+    }
+
+    showConfirmDialog(
+      '記事を公開しますか？',
+      'HPに記事が公開されます。公開後、数分で反映されます。',
+      function() {
+        // まず保存してから公開
+        showLoading('公開中...');
+        google.script.run
+          .withSuccessHandler(function(saveResult) {
+            if (!saveResult.success) {
+              hideLoading();
+              showMessage(saveResult.error, 'error');
+              return;
+            }
+            var postId = saveResult.id;
+            if (!state.editingPost) {
+              state.editingPost = { id: postId };
+            }
+
+            google.script.run
+              .withSuccessHandler(function(pubResult) {
+                hideLoading();
+                if (pubResult.success) {
+                  showMessage(pubResult.message, 'success');
+                  // ボタン表示を更新
+                  document.getElementById('btn-publish').textContent = '更新して再公開';
+                  document.getElementById('btn-unpublish').style.display = 'block';
+                } else {
+                  showMessage(pubResult.error, 'error');
+                }
+              })
+              .withFailureHandler(function(err) {
+                hideLoading();
+                showMessage('公開に失敗しました', 'error');
+              })
+              .publishPost(state.token, postId);
+          })
+          .withFailureHandler(function(err) {
+            hideLoading();
+            showMessage('保存に失敗しました', 'error');
+          })
+          .savePost(state.token, data);
+      }
+    );
+  }
+
+  function handleUnpublish() {
+    if (!state.editingPost) return;
+
+    showConfirmDialog(
+      '非公開にしますか？',
+      'HPから記事が削除されます。下書きとしてこの管理画面には残ります。',
+      function() {
+        showLoading('非公開にしています...');
+        google.script.run
+          .withSuccessHandler(function(result) {
+            hideLoading();
+            if (result.success) {
+              showMessage(result.message, 'success');
+              document.getElementById('btn-publish').textContent = '公開する';
+              document.getElementById('btn-unpublish').style.display = 'none';
+            } else {
+              showMessage(result.error, 'error');
+            }
+          })
+          .withFailureHandler(function(err) {
+            hideLoading();
+            showMessage('非公開に失敗しました', 'error');
+          })
+          .unpublishPost(state.token, state.editingPost.id);
+      }
+    );
+  }
+
+  // --- 削除 ---
+  function confirmDelete(id, title) {
+    showConfirmDialog(
+      '「' + title + '」を削除しますか？',
+      'この操作は取り消せません。公開済みの場合、HPからも削除されます。',
+      function() {
+        showLoading('削除中...');
+        google.script.run
+          .withSuccessHandler(function(result) {
+            hideLoading();
+            if (result.success) {
+              showMessage('記事を削除しました', 'success');
+              loadPosts();
+            } else {
+              showMessage(result.error, 'error');
+            }
+          })
+          .withFailureHandler(function(err) {
+            hideLoading();
+            showMessage('削除に失敗しました', 'error');
+          })
+          .deletePost(state.token, id);
+      }
+    );
+  }
+
+  // --- ツールバー（Markdown挿入） ---
+  function insertMarkdown(type) {
+    var textarea = document.getElementById('post-content');
+    var start = textarea.selectionStart;
+    var end = textarea.selectionEnd;
+    var text = textarea.value;
+    var selected = text.substring(start, end);
+
+    var before = '';  // カーソルの前に入るテキスト
+    var after = '';   // カーソルの後に入るテキスト
+
+    switch (type) {
+      case 'h1':
+        // 行頭に # を挿入、カーソルはその直後
+        before = '# ';
+        after = '';
+        break;
+      case 'h2':
+        before = '## ';
+        after = '';
+        break;
+      case 'bold':
+        // 選択テキストがあれば囲む、なければカーソルを**の間に置く
+        before = '**';
+        after = '**';
+        break;
+      case 'list':
+        before = '- ';
+        after = '';
+        break;
+    }
+
+    if (selected) {
+      // テキスト選択中：選択部分を囲む
+      textarea.value = text.substring(0, start) + before + selected + after + text.substring(end);
+      var newPos = start + before.length + selected.length + after.length;
+      textarea.selectionStart = newPos;
+      textarea.selectionEnd = newPos;
+    } else {
+      // 選択なし：記号を挿入してカーソルを入力位置に置く
+      textarea.value = text.substring(0, start) + before + after + text.substring(end);
+      var cursorPos = start + before.length;
+      textarea.selectionStart = cursorPos;
+      textarea.selectionEnd = cursorPos;
+    }
+
+    textarea.focus();
+  }
+
+  // --- プレビュー ---
+  function togglePreview() {
+    var previewArea = document.getElementById('preview-area');
+    var btn = document.querySelector('.btn-preview');
+
+    if (previewArea.style.display === 'none') {
+      var content = document.getElementById('post-content').value;
+      previewArea.innerHTML = markdownToHtml(content);
+      previewArea.style.display = 'block';
+      btn.textContent = 'プレビューを閉じる';
+    } else {
+      previewArea.style.display = 'none';
+      btn.textContent = 'プレビュー';
+    }
+  }
+
+  function markdownToHtml(md) {
+    if (!md) return '<p style="color:#888;">本文がありません</p>';
+
+    var lines = md.split('\n');
+    var html = '';
+    var inList = false;
+
+    for (var i = 0; i < lines.length; i++) {
+      var line = lines[i];
+
+      // 見出し
+      if (line.match(/^## /)) {
+        if (inList) { html += '</ul>'; inList = false; }
+        html += '<h2>' + escapeHtml(line.substring(3)) + '</h2>';
+      } else if (line.match(/^# /)) {
+        if (inList) { html += '</ul>'; inList = false; }
+        html += '<h1>' + escapeHtml(line.substring(2)) + '</h1>';
+      }
+      // 箇条書き
+      else if (line.match(/^- /)) {
+        if (!inList) { html += '<ul>'; inList = true; }
+        html += '<li>' + processInline(line.substring(2)) + '</li>';
+      }
+      // 画像
+      else if (line.match(/^!\[.*\]\(.*\)$/)) {
+        if (inList) { html += '</ul>'; inList = false; }
+        var imgMatch = line.match(/^!\[(.*?)\]\((.*?)\)$/);
+        if (imgMatch) {
+          html += '<img src="' + escapeHtml(imgMatch[2]) + '" alt="' + escapeHtml(imgMatch[1]) + '">';
+        }
+      }
+      // 空行
+      else if (line.trim() === '') {
+        if (inList) { html += '</ul>'; inList = false; }
+      }
+      // 通常テキスト
+      else {
+        if (inList) { html += '</ul>'; inList = false; }
+        html += '<p>' + processInline(line) + '</p>';
+      }
+    }
+
+    if (inList) html += '</ul>';
+    return html || '<p style="color:#888;">本文がありません</p>';
+  }
+
+  function processInline(text) {
+    // **太字** を <strong> に変換
+    text = escapeHtml(text);
+    text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    return text;
+  }
+
+  // --- 画像アップロード ---
+  function handleImageUpload() {
+    document.getElementById('image-input').click();
+  }
+
+  function onImageSelected(input) {
+    var file = input.files[0];
+    if (!file) return;
+
+    // 画像ファイルかチェック
+    if (!file.type.startsWith('image/')) {
+      showMessage('画像ファイルを選択してください', 'error');
+      return;
+    }
+
+    showLoading('画像をアップロード中...');
+
+    // クライアント側でリサイズ
+    resizeImage(file, 1200, function(base64Data) {
+      // data:image/... プレフィックスを除去
+      var pure64 = base64Data.split(',')[1];
+
+      google.script.run
+        .withSuccessHandler(function(result) {
+          hideLoading();
+          if (result.success) {
+            // カーソル位置にMarkdownタグを挿入
+            var textarea = document.getElementById('post-content');
+            var pos = textarea.selectionStart;
+            var text = textarea.value;
+            var insertion = '\n' + result.markdown + '\n';
+            textarea.value = text.substring(0, pos) + insertion + text.substring(pos);
+            showMessage('画像をアップロードしました', 'success');
+          } else {
+            showMessage(result.error, 'error');
+          }
+        })
+        .withFailureHandler(function(err) {
+          hideLoading();
+          showMessage('画像のアップロードに失敗しました', 'error');
+        })
+        .uploadImage(state.token, file.name, pure64);
+    });
+
+    // inputをリセット
+    input.value = '';
+  }
+
+  function resizeImage(file, maxWidth, callback) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var img = new Image();
+      img.onload = function() {
+        var width = img.width;
+        var height = img.height;
+
+        if (width > maxWidth) {
+          height = Math.round(height * (maxWidth / width));
+          width = maxWidth;
+        }
+
+        var canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        var ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+
+        // JPEG 85%品質で出力
+        var dataUrl = canvas.toDataURL('image/jpeg', 0.85);
+        callback(dataUrl);
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  // --- 確認ダイアログ ---
+  function showConfirmDialog(title, message, onConfirm) {
+    var overlay = document.getElementById('dialog-overlay');
+    document.getElementById('dialog-title').textContent = title;
+    document.getElementById('dialog-message').textContent = message;
+    overlay.style.display = 'flex';
+
+    // コールバックを設定
+    window._dialogConfirm = function() {
+      overlay.style.display = 'none';
+      onConfirm();
+    };
+    window._dialogCancel = function() {
+      overlay.style.display = 'none';
+    };
+  }
+
+  // --- ローディング ---
+  function showLoading(text) {
+    state.loading = true;
+    var overlay = document.getElementById('loading-overlay');
+    document.getElementById('loading-text').textContent = text || '処理中...';
+    overlay.style.display = 'flex';
+  }
+
+  function hideLoading() {
+    state.loading = false;
+    document.getElementById('loading-overlay').style.display = 'none';
+  }
+
+  // --- メッセージ ---
+  function showMessage(text, type) {
+    var area = document.getElementById('message-area');
+    var cls = type === 'error' ? 'message-error' : 'message-success';
+    area.innerHTML = '<div class="message ' + cls + '">' + escapeHtml(text) + '</div>';
+
+    // 5秒後に消す
+    setTimeout(function() {
+      area.innerHTML = '';
+    }, 5000);
+  }
+
+  // --- ユーティリティ ---
+  function escapeHtml(text) {
+    if (!text) return '';
+    var div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  function formatDate(dateStr) {
+    if (!dateStr) return '';
+    var parts = dateStr.split('-');
+    if (parts.length === 3) {
+      return parts[0] + '年' + parseInt(parts[1]) + '月' + parseInt(parts[2]) + '日';
+    }
+    return dateStr;
+  }
+
+  function getTodayString() {
+    var d = new Date();
+    var y = d.getFullYear();
+    var m = ('0' + (d.getMonth() + 1)).slice(-2);
+    var day = ('0' + d.getDate()).slice(-2);
+    return y + '-' + m + '-' + day;
+  }
+
+  // Enterキーでログイン
+  function handlePasswordKeydown(e) {
+    if (e.key === 'Enter') handleLogin();
+  }
+</script>
