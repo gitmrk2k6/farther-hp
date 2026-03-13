@@ -34,7 +34,7 @@ export default function LecturePage() {
             講演会について
           </h1>
           <p className="text-foreground/60 text-sm md:text-base leading-relaxed">
-            歌とトークを織り交ぜた独自のスタイルで、学校・福祉施設・企業研修・文化祭など幅広い場で講演を行っています。
+            歌とトークを織り交ぜた独自のスタイルで、学校など幅広い場での講演会を開催しています。
           </p>
           <div className="mt-5 mx-auto w-16 h-0.5 bg-primary/40 rounded-full" />
           <FadeIn>

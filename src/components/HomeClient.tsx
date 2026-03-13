@@ -173,8 +173,7 @@ export default function HomeClient({ newsItems, blogPreviews }: HomeClientProps)
                   <h2 className="font-bold text-xl mb-2">講演会について</h2>
                   <p className="text-sm text-foreground/60 leading-relaxed">
                     歌とトークを織り交ぜた独自のスタイルで、
-                    学校、福祉施設、企業研修、文化祭など
-                    幅広い場で講演を行っています。
+                    学校など幅広い場での講演会を開催しています。
                   </p>
                 </div>
                 <Link
