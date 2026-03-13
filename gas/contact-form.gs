@@ -4,7 +4,7 @@
  * 【セットアップ手順】
  * 1. Google Spreadsheet を新規作成
  * 2. 1行目にヘッダーを入力:
- *    A:受信日時 | B:お名前 | C:団体名 | D:メール | E:電話 | F:件名 | G:メッセージ | H:イベント詳細 | I:CD注文 | J:郵便番号 | K:住所
+ *    A:受信日時 | B:お名前 | C:主催者名 | D:メール | E:電話・FAX | F:件名 | G:メッセージ | H:イベント詳細 | I:CD注文 | J:郵便番号 | K:住所
  * 3. メニュー「拡張機能」→「Apps Script」を開く
  * 4. このスクリプトを貼り付けて保存
  * 5. NOTIFICATION_EMAIL を通知先メールアドレスに変更
@@ -31,9 +31,11 @@ function doPost(e) {
       var parts = [];
       if (ed.date) parts.push("希望日時: " + ed.date);
       if (ed.venue) parts.push("会場: " + ed.venue);
+      if (ed.address) parts.push("住所: " + ed.address);
       if (ed.audience) parts.push("対象者: " + ed.audience);
       if (ed.capacity) parts.push("参加人数: " + ed.capacity);
       if (ed.theme) parts.push("テーマ: " + ed.theme);
+      if (ed.budget) parts.push("予算: " + ed.budget);
       eventDetailsStr = parts.join("\n");
     }
 
@@ -89,11 +91,11 @@ function buildEmailBody(data, eventDetailsStr, cdOrderStr) {
   lines.push("━━━━━━━━━━━━━━━━━━━━");
   lines.push("■ お名前: " + (data.name || ""));
   if (data.organization) {
-    lines.push("■ 団体名: " + data.organization);
+    lines.push("■ 主催者名: " + data.organization);
   }
   lines.push("■ メール: " + (data.email || ""));
   if (data.phone) {
-    lines.push("■ 電話: " + data.phone);
+    lines.push("■ 電話・FAX: " + data.phone);
   }
   lines.push("■ 件名: " + (data.subject || ""));
   lines.push("━━━━━━━━━━━━━━━━━━━━");
