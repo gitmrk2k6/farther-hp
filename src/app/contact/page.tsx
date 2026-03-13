@@ -363,7 +363,7 @@ export default function ContactPage() {
                             合計：¥{Object.entries(cdOrder).reduce((sum, [title, qty]) => {
                               const cd = cdList.find((c) => c.title === title);
                               return sum + (cd ? cd.price * qty : 0);
-                            }, 0).toLocaleString()}（税込）＋送料200円
+                            }, 0).toLocaleString()}（税込）＋送料
                           </p>
                         </div>
                       )}
