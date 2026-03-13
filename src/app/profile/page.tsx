@@ -21,24 +21,14 @@ export default function ProfilePage() {
           <FadeIn>
             <div className="flex flex-col md:flex-row gap-10 items-start">
               {/* Photo */}
-              <div className="w-full md:w-2/5 flex-shrink-0">
+              <div className="w-full md:w-1/3 flex-shrink-0">
                 <div className="bg-section-alt rounded-2xl overflow-hidden">
-                  {/* スマホ: 全体表示 / PC: 上を少し切ってバランスを取る */}
-                  <div className="relative hidden md:block aspect-[3/4]">
-                    <Image
-                      src={assetPath("/images/portrait-outdoor.jpg")}
-                      alt="小西達也"
-                      fill
-                      className="object-cover object-[center_20%]"
-                      sizes="40vw"
-                    />
-                  </div>
                   <Image
                     src={assetPath("/images/portrait-outdoor.jpg")}
                     alt="小西達也"
                     width={600}
                     height={800}
-                    className="w-full h-auto md:hidden"
+                    className="w-full h-auto"
                   />
                 </div>
               </div>
