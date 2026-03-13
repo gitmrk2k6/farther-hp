@@ -23,12 +23,22 @@ export default function ProfilePage() {
               {/* Photo */}
               <div className="w-full md:w-2/5 flex-shrink-0">
                 <div className="bg-section-alt rounded-2xl overflow-hidden">
+                  {/* スマホ: 全体表示 / PC: アスペクト比を固定してバランスを取る */}
+                  <div className="relative hidden md:block aspect-[3/4]">
+                    <Image
+                      src={assetPath("/images/portrait-outdoor.jpg")}
+                      alt="小西達也"
+                      fill
+                      className="object-cover"
+                      sizes="40vw"
+                    />
+                  </div>
                   <Image
                     src={assetPath("/images/portrait-outdoor.jpg")}
                     alt="小西達也"
                     width={600}
                     height={800}
-                    className="w-full h-auto"
+                    className="w-full h-auto md:hidden"
                   />
                 </div>
               </div>
