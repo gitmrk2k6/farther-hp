@@ -5,8 +5,8 @@ import FadeIn from "@/components/FadeIn";
 import SectionTitle from "@/components/SectionTitle";
 import { assetPath } from "@/lib/path";
 
-const photos: { src: string; alt: string; objectPosition?: string }[] = [
-  { src: assetPath("/images/portrait-outdoor.jpg"), alt: "プロフィール", objectPosition: "bottom" },
+const photos: { src: string; alt: string; className?: string }[] = [
+  { src: assetPath("/images/portrait-outdoor.jpg"), alt: "プロフィール", className: "object-bottom" },
   { src: assetPath("/images/concert-pink-shirt.jpg"), alt: "コンサート" },
   { src: assetPath("/images/concert-cherry-blossom.jpg"), alt: "コンサート" },
   { src: assetPath("/images/concert-golden-curtain.jpg"), alt: "コンサート" },
@@ -48,7 +48,7 @@ export default function GalleryPage() {
                     src={photo.src}
                     alt={photo.alt}
                     fill
-                    className={`object-cover ${photo.objectPosition ? `object-${photo.objectPosition}` : ""}`}
+                    className={`object-cover ${photo.className || ""}`}
                     sizes="(max-width: 768px) 50vw, 33vw"
                   />
                 </div>
