@@ -6,7 +6,7 @@ import SectionTitle from "@/components/SectionTitle";
 import { assetPath } from "@/lib/path";
 
 const photos: { src: string; alt: string; className?: string }[] = [
-  { src: assetPath("/images/portrait-outdoor.jpg"), alt: "プロフィール", className: "object-bottom" },
+  { src: assetPath("/images/portrait-outdoor.jpg"), alt: "プロフィール", className: "object-[center_20%]" },
   { src: assetPath("/images/concert-pink-shirt.jpg"), alt: "コンサート" },
   { src: assetPath("/images/concert-cherry-blossom.jpg"), alt: "コンサート" },
   { src: assetPath("/images/concert-golden-curtain.jpg"), alt: "コンサート" },
