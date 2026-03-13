@@ -19,10 +19,10 @@ export default function ProfilePage() {
       <section className="py-16 px-4">
         <div className="max-w-3xl mx-auto">
           <FadeIn>
-            <div className="flex flex-col md:flex-row gap-10 items-start">
+            <div className="flex flex-col md:flex-row gap-10 items-stretch">
               {/* Photo */}
               <div className="w-full md:w-2/5 flex-shrink-0">
-                <div className="aspect-[3/4] bg-section-alt rounded-2xl overflow-hidden relative">
+                <div className="h-full min-h-[300px] bg-section-alt rounded-2xl overflow-hidden relative">
                   <Image
                     src={assetPath("/images/portrait-outdoor.jpg")}
                     alt="小西達也"
