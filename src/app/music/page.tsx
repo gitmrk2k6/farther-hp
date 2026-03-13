@@ -171,9 +171,12 @@ export default function MusicPage() {
                     {album.tracks.length > 0 && (
                       <div className="text-sm text-foreground/60 leading-relaxed mt-4">
                         <p className="text-xs font-medium text-muted mb-2">収録曲</p>
-                        <ol className="space-y-0.5 list-decimal list-inside">
+                        <ol className="space-y-0.5">
                           {album.tracks.map((track, j) => (
-                            <li key={j}>{track}</li>
+                            <li key={j} className="flex gap-1">
+                              <span className="tabular-nums text-right min-w-[1.5em] flex-shrink-0">{j + 1}.</span>
+                              <span>{track}</span>
+                            </li>
                           ))}
                         </ol>
                       </div>
@@ -218,8 +221,9 @@ export default function MusicPage() {
                   <p className="font-medium">079-235-6185　ゆめぷらん事務局　小西</p>
                 </div>
                 <div className="border-t border-foreground/10 pt-4 mt-4 space-y-2 text-sm text-muted">
-                  <p>※送付に関わる費用（送料等）…枚数に関わらず一律200円</p>
-                  <p className="ml-3">お支払いは商品到着後同封の郵便振替用紙にて送金してください。</p>
+                  <p>お支払いはCD等の到着後の振込になります。</p>
+                  <p>振込先を書いた用紙は商品に同封されています。</p>
+                  <p>送料は送る物や数によって違いますので、その都度の実費をお知らせします。</p>
                   <p>※注文されてから10日以上経過しても届かない場合は、申し訳ありませんが再度ご連絡ください。</p>
                 </div>
               </div>
