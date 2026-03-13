@@ -25,9 +25,6 @@ const photos = [
   { src: assetPath("/images/concert-blue.jpg"), alt: "コンサート" },
   { src: assetPath("/images/concert-orange.jpg"), alt: "コンサート" },
   { src: assetPath("/images/concert-side-dark.jpg"), alt: "コンサート" },
-  { src: assetPath("/images/lecture-school-hall.jpg"), alt: "講演会" },
-  { src: assetPath("/images/lecture-school-gym.jpg"), alt: "講演会" },
-  { src: assetPath("/images/lecture-children.jpg"), alt: "講演会" },
   { src: assetPath("/images/lecture-venue.jpg"), alt: "講演会" },
 ];
 
