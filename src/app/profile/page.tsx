@@ -38,7 +38,7 @@ export default function ProfilePage() {
                     src={assetPath("/images/portrait-outdoor.jpg")}
                     alt="小西達也"
                     fill
-                    className="object-cover object-top"
+                    className="object-cover object-bottom"
                     sizes="33vw"
                   />
                 </div>
