@@ -22,7 +22,15 @@ export default function EventsPage() {
         <div className="max-w-4xl mx-auto text-center">
           <SectionTitle
             title="コンサート情報"
-            subtitle="このページに記載される講演会、コンサートは基本的にどなたにでも参加して頂けるものに限っています。地域限定の場合はその都度お知らせいたします。"
+            subtitle={
+              <>
+                このページに記載される講演会、コンサートは
+                <br className="hidden sm:inline" />
+                基本的にどなたにでも参加して頂けるものに限っています。
+                <br />
+                地域限定の場合はその都度お知らせいたします。
+              </>
+            }
           />
           <FadeIn>
             <div className="mt-8 rounded-2xl overflow-hidden relative aspect-[16/7] max-w-3xl mx-auto">
