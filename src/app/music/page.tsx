@@ -205,7 +205,7 @@ export default function MusicPage() {
               </h3>
               <div className="space-y-4 text-foreground/70 leading-relaxed">
                 <p>
-                  購入ご希望の方は、郵便番号・住所・氏名・電話番号・CDタイトル・枚数をメール、またはお問い合わせフォームよりご連絡ください。
+                  購入ご希望の方は、郵便番号・住所・氏名・電話番号・CDタイトル・枚数を以下の方法よりご連絡ください。
                 </p>
                 <div className="space-y-2">
                   <p>
@@ -221,9 +221,9 @@ export default function MusicPage() {
                   <p className="font-medium">079-235-6185　ゆめぷらん事務局　小西</p>
                 </div>
                 <div className="border-t border-foreground/10 pt-4 mt-4 space-y-2 text-sm text-muted">
-                  <p>お支払いはCD等の到着後の振込になります。</p>
+                  <p>お支払いはCDの到着後の振込になります。</p>
                   <p>振込先を書いた用紙は商品に同封されています。</p>
-                  <p>送料は送る物や数によって違いますので、その都度の実費をお知らせします。</p>
+                  <p>送料は数によって違いますので、その都度の実費をお知らせします。</p>
                   <p>※注文されてから10日以上経過しても届かない場合は、申し訳ありませんが再度ご連絡ください。</p>
                 </div>
               </div>

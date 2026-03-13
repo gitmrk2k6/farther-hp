@@ -6,6 +6,10 @@ import SectionTitle from "@/components/SectionTitle";
 import { assetPath } from "@/lib/path";
 
 const photos = [
+  { src: assetPath("/images/portrait-outdoor.jpg"), alt: "プロフィール" },
+  { src: assetPath("/images/concert-pink-shirt.jpg"), alt: "コンサート" },
+  { src: assetPath("/images/concert-cherry-blossom.jpg"), alt: "コンサート" },
+  { src: assetPath("/images/concert-golden-curtain.jpg"), alt: "コンサート" },
   { src: assetPath("/images/concert-rainbow.jpg"), alt: "コンサート" },
   { src: assetPath("/images/concert-green.jpg"), alt: "コンサート" },
   { src: assetPath("/images/concert-old-photo.jpg"), alt: "コンサート" },
@@ -21,6 +25,9 @@ const photos = [
   { src: assetPath("/images/concert-blue.jpg"), alt: "コンサート" },
   { src: assetPath("/images/concert-orange.jpg"), alt: "コンサート" },
   { src: assetPath("/images/concert-side-dark.jpg"), alt: "コンサート" },
+  { src: assetPath("/images/lecture-school-hall.jpg"), alt: "講演会" },
+  { src: assetPath("/images/lecture-school-gym.jpg"), alt: "講演会" },
+  { src: assetPath("/images/lecture-children.jpg"), alt: "講演会" },
   { src: assetPath("/images/lecture-venue.jpg"), alt: "講演会" },
 ];
 
@@ -30,7 +37,7 @@ export default function GalleryPage() {
       {/* Hero */}
       <section className="py-14 px-4 bg-section-alt">
         <div className="max-w-4xl mx-auto text-center">
-          <SectionTitle title="写真" subtitle="コンサートや講演会の様子" />
+          <SectionTitle title="写真" subtitle="チラシやポスターなどの製作にお使いください" />
         </div>
       </section>
 
