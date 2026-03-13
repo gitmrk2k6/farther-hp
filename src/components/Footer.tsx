@@ -59,7 +59,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="https://x.com/yumeplan_tk"
                   className="hover:text-primary-light transition-colors"
                   target="_blank"
                   rel="noopener noreferrer"
