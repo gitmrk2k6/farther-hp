@@ -147,7 +147,7 @@ export default function HomeClient({ newsItems, blogPreviews }: HomeClientProps)
           <FadeIn>
             <div className="bg-card-bg rounded-2xl p-8 md:p-12 shadow-sm text-center">
               <p className="text-foreground/70 leading-relaxed text-lg">
-                1962年、兵庫県豊岡市生まれ。
+                1962年、兵庫県豊岡市生まれ（姫路市在住）。
                 先天性骨形成不全症により幼少から車椅子で生活しながら、
                 12歳でギターを手にし、現在は全国各地で
                 コンサートや講演活動を行っています。
