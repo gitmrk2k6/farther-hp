@@ -19,16 +19,27 @@ export default function ProfilePage() {
       <section className="py-16 px-4">
         <div className="max-w-3xl mx-auto">
           <FadeIn>
-            <div className="flex flex-col md:flex-row gap-10 items-start">
+            <div className="flex flex-col md:flex-row gap-10 items-stretch">
               {/* Photo */}
               <div className="w-full md:w-1/3 flex-shrink-0">
-                <div className="bg-section-alt rounded-2xl overflow-hidden">
+                {/* スマホ: 全体表示 */}
+                <div className="md:hidden bg-section-alt rounded-2xl overflow-hidden">
                   <Image
                     src={assetPath("/images/portrait-outdoor.jpg")}
                     alt="小西達也"
                     width={600}
                     height={800}
                     className="w-full h-auto"
+                  />
+                </div>
+                {/* PC: テキストの高さに合わせて上を切る */}
+                <div className="hidden md:block relative h-full bg-section-alt rounded-2xl overflow-hidden">
+                  <Image
+                    src={assetPath("/images/portrait-outdoor.jpg")}
+                    alt="小西達也"
+                    fill
+                    className="object-cover object-top"
+                    sizes="33vw"
                   />
                 </div>
               </div>
