@@ -22,14 +22,14 @@ export default function ProfilePage() {
             <div className="flex flex-col md:flex-row gap-10 items-stretch">
               {/* Photo */}
               <div className="w-full md:w-1/3 flex-shrink-0">
-                {/* スマホ: 全体表示 */}
-                <div className="md:hidden bg-section-alt rounded-2xl overflow-hidden">
+                {/* スマホ: 上を少し切る */}
+                <div className="md:hidden relative aspect-[3/4] bg-section-alt rounded-2xl overflow-hidden">
                   <Image
                     src={assetPath("/images/portrait-outdoor.jpg")}
                     alt="小西達也"
-                    width={600}
-                    height={800}
-                    className="w-full h-auto"
+                    fill
+                    className="object-cover object-[center_30%]"
+                    sizes="100vw"
                   />
                 </div>
                 {/* PC: テキストの高さに合わせて上を切る */}
