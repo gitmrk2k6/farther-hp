@@ -9,12 +9,7 @@ const lectureFeatures = [
   {
     title: "トーク&コンサート形式",
     description:
-      "ただ話すだけの講演ではなく、歌とトークを織り交ぜた独自のスタイル。参加者の心に直接届く体験をお届けします。",
-  },
-  {
-    title: "2,500本以上の実績",
-    description:
-      "全国各地で2,500本を超えるコンサート・講演の実績があります。学校、福祉施設、企業など幅広い会場での経験が豊富です。",
+      "ただ語るだけの講演ではなく、歌と語りを織り交ぜた独自のスタイル。参加者の心に響く歌と語り（体験など）をお届けします。",
   },
   {
     title: "幅広い対象に対応",
@@ -98,14 +93,14 @@ export default function LecturePage() {
           <h3 className="font-serif text-2xl font-bold mb-10 text-center">
             講演の特徴
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
             {lectureFeatures.map((feature, i) => (
               <FadeIn key={i} delay={i * 0.1}>
-                <div className="bg-card-bg rounded-2xl p-6 shadow-sm h-full">
+                <div className="bg-card-bg rounded-2xl p-8 shadow-sm h-full">
                   <h4 className="font-bold text-lg mb-3 text-primary">
                     {feature.title}
                   </h4>
-                  <p className="text-sm text-foreground/60 leading-relaxed">
+                  <p className="text-foreground/60 leading-relaxed">
                     {feature.description}
                   </p>
                 </div>
