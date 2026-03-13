@@ -12,7 +12,6 @@ const photos = [
   { src: assetPath("/images/concert-golden-curtain.jpg"), alt: "コンサート" },
   { src: assetPath("/images/concert-rainbow.jpg"), alt: "コンサート" },
   { src: assetPath("/images/concert-green.jpg"), alt: "コンサート" },
-  { src: assetPath("/images/concert-old-photo.jpg"), alt: "コンサート" },
   { src: assetPath("/images/concert-blue-curtain.jpg"), alt: "コンサート" },
   { src: assetPath("/images/concert-red-spotlight.jpg"), alt: "コンサート" },
   { src: assetPath("/images/concert-purple-stage.jpg"), alt: "コンサート" },

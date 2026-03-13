@@ -22,12 +22,13 @@ export default function ProfilePage() {
             <div className="flex flex-col md:flex-row gap-10 items-stretch">
               {/* Photo */}
               <div className="w-full md:w-2/5 flex-shrink-0">
-                <div className="h-full min-h-[300px] bg-section-alt rounded-2xl overflow-hidden relative">
+                <div className="bg-section-alt rounded-2xl overflow-hidden">
                   <Image
                     src={assetPath("/images/portrait-outdoor.jpg")}
                     alt="小西達也"
-                    fill
-                    className="object-cover"
+                    width={600}
+                    height={800}
+                    className="w-full h-auto"
                   />
                 </div>
               </div>

@@ -30,9 +30,11 @@ export default function ContactPage() {
   const [eventDetails, setEventDetails] = useState({
     date: "",
     venue: "",
+    address: "",
     audience: "",
     capacity: "",
     theme: "",
+    budget: "",
   });
   const [cdOrder, setCdOrder] = useState<CdOrder>({});
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
@@ -75,7 +77,7 @@ export default function ContactPage() {
 
       setStatus("sent");
       setFormData({ name: "", organization: "", email: "", phone: "", subject: "", message: "", postalCode: "", address: "" });
-      setEventDetails({ date: "", venue: "", audience: "", capacity: "", theme: "" });
+      setEventDetails({ date: "", venue: "", address: "", audience: "", capacity: "", theme: "", budget: "" });
       setCdOrder({});
     } catch {
       setStatus("error");
@@ -117,7 +119,7 @@ export default function ContactPage() {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
                     <label className="block text-sm font-medium mb-2">
-                      お名前 <span className="text-red-500">*</span>
+                      お名前（担当者名） <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="text"
@@ -132,7 +134,7 @@ export default function ContactPage() {
 
                   <div>
                     <label className="block text-sm font-medium mb-2">
-                      団体名・学校名・施設名など
+                      主催者名
                     </label>
                     <input
                       type="text"
@@ -140,7 +142,7 @@ export default function ContactPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, organization: e.target.value })
                       }
-                      placeholder="例：○○小学校、△△福祉施設"
+                      placeholder=""
                       className="w-full px-4 py-3 rounded-xl border border-primary/10 bg-background focus:outline-none focus:border-primary/30 transition-colors"
                     />
                   </div>
@@ -162,7 +164,7 @@ export default function ContactPage() {
 
                   <div>
                     <label className="block text-sm font-medium mb-2">
-                      電話番号
+                      電話番号・FAX
                     </label>
                     <input
                       type="tel"
@@ -222,6 +224,16 @@ export default function ContactPage() {
                             className="w-full px-3 py-2 rounded-lg border border-primary/10 bg-background text-sm focus:outline-none focus:border-primary/30 transition-colors"
                           />
                         </div>
+                        <div className="sm:col-span-2">
+                          <label className="block text-xs text-muted mb-1">住所</label>
+                          <input
+                            type="text"
+                            value={eventDetails.address}
+                            onChange={(e) => setEventDetails({ ...eventDetails, address: e.target.value })}
+                            placeholder="例：兵庫県姫路市○○町1-2-3"
+                            className="w-full px-3 py-2 rounded-lg border border-primary/10 bg-background text-sm focus:outline-none focus:border-primary/30 transition-colors"
+                          />
+                        </div>
                         <div>
                           <label className="block text-xs text-muted mb-1">対象者</label>
                           <input
@@ -255,6 +267,16 @@ export default function ContactPage() {
                           />
                         </div>
                       )}
+                      <div>
+                        <label className="block text-xs text-muted mb-1">予算</label>
+                        <input
+                          type="text"
+                          value={eventDetails.budget}
+                          onChange={(e) => setEventDetails({ ...eventDetails, budget: e.target.value })}
+                          placeholder="例：○○万円程度"
+                          className="w-full px-3 py-2 rounded-lg border border-primary/10 bg-background text-sm focus:outline-none focus:border-primary/30 transition-colors"
+                        />
+                      </div>
                     </div>
                   )}
 
