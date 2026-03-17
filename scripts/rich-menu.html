@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 2500px;
+    height: 1686px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    font-family: 'Helvetica Neue', 'Arial', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+  }
+  .cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #FDF8F3;
+    border: 2px solid #E8DDD0;
+    gap: 20px;
+  }
+  .cell .icon {
+    font-size: 80px;
+  }
+  .cell .label {
+    font-size: 96px;
+    font-weight: 700;
+    color: #3D3228;
+    letter-spacing: 0.05em;
+  }
+  .cell .sub {
+    font-size: 48px;
+    color: #A89B8C;
+    letter-spacing: 0.02em;
+  }
+  .cell-a { background: linear-gradient(135deg, #FDF8F3 0%, #F5EDE3 100%); }
+  .cell-b { background: linear-gradient(135deg, #FDF8F3 0%, #F5EDE3 100%); }
+  .cell-c { background: linear-gradient(135deg, #FDF8F3 0%, #F5EDE3 100%); }
+  .cell-d { background: linear-gradient(135deg, #FDF8F3 0%, #F5EDE3 100%); }
+
+  .cell .icon-circle {
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  .cell-a .icon-circle { background: #FF0000; }
+  .cell-b .icon-circle { background: #B8860B; }
+  .cell-c .icon-circle { background: #3D3228; }
+  .cell-d .icon-circle { background: #B8860B; }
+
+  .cell .icon-circle svg {
+    width: 160px;
+    height: 160px;
+    fill: white;
+  }
+</style>
+</head>
+<body>
+  <!-- A: YouTube -->
+  <div class="cell cell-a">
+    <div class="icon-circle">
+      <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+    </div>
+    <span class="label">YouTube</span>
+    <span class="sub">動画を見る</span>
+  </div>
+
+  <!-- B: ブログ -->
+  <div class="cell cell-b">
+    <div class="icon-circle">
+      <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+    </div>
+    <span class="label">ブログ</span>
+    <span class="sub">最新記事を読む</span>
+  </div>
+
+  <!-- C: お問い合わせ -->
+  <div class="cell cell-c">
+    <div class="icon-circle">
+      <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+    </div>
+    <span class="label">お問い合わせ</span>
+    <span class="sub">ご連絡はこちら</span>
+  </div>
+
+  <!-- D: ホームページ -->
+  <div class="cell cell-d">
+    <div class="icon-circle">
+      <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+    </div>
+    <span class="label">ホームページ</span>
+    <span class="sub">公式サイトを見る</span>
+  </div>
+</body>
+</html>

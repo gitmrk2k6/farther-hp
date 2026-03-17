@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 小西達也 公式ウェブサイト
 
-## Getting Started
+## 目的
 
-First, run the development server:
+シンガーソングライター・講演者である小西達也の公式サイトを構築・運用する。
+YouTube・ブログ・LINE公式アカウントと連携し、ファンへの情報発信を自動化する。
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 成果物
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- 公式ウェブサイト（GitHub Pages）
+- GASスクリプト（お問い合わせフォーム / ブログ管理画面 / LINE自動通知）
+- RSSフィード（ビルド時自動生成: /feed.xml）
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 完了条件（DoD）
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- [x] 全ページのUI実装（ホーム、プロフィール、CD、講演会、コンサート情報、写真、ブログ、YouTube、お問い合わせ）
+- [x] GitHub Pagesにデプロイ済み（GitHub Actionsで自動デプロイ）
+- [x] YouTube自動連携（RSSフィードから最新動画を取得・表示）
+- [x] ブログ機能（Markdownベース + GAS管理画面からの投稿）
+- [x] お問い合わせフォーム（GAS → スプレッドシート + メール通知）
+- [x] LINE公式アカウント連携（リッチメニュー + 自動通知）
+- [x] RSSフィード自動生成（ビルド時にfeed.xmlを出力）
+- [x] レスポンシブ対応（PC / スマートフォン）
 
-## Learn More
+## ルール
 
-To learn more about Next.js, take a look at the following resources:
+- デプロイ先は **GitHub Pages**（Vercelではない）
+- 秘密情報はコードにハードコードしない（GASスクリプトプロパティ or 環境変数）
+- Tailwind CSSの動的クラス名は使わない（ビルド時に認識されないため）
+- 詳細なAIへの指示は `instruction.md` を参照
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 参照ファイル
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `instruction.md` — AIへの指示（役割・ルール・技術スタック・デザイン規約）
+- `gas/line-notify/SETUP.md` — LINE自動通知のセットアップ手順
+- `gas/blog-manager/SETUP.md` — ブログ管理画面のセットアップ手順
 
-## Deploy on Vercel
+## 更新履歴
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- 2026-03-08: サイト初版公開
+- 2026-03-13: お問い合わせフォーム・Xアカウント連携
+- 2026-03-14: ブログ管理画面（GAS）追加
+- 2026-03-18: LINE公式アカウント連携（リッチメニュー・自動通知・RSSフィード）
