@@ -67,6 +67,16 @@ export default function Footer() {
                   X (Twitter)
                 </a>
               </li>
+              <li>
+                <a
+                  href="https://lin.ee/Jz0Vqk1"
+                  className="hover:text-primary-light transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  LINE公式
+                </a>
+              </li>
             </ul>
           </div>
         </div>
