@@ -33,6 +33,13 @@ html {
   scroll-behavior: smooth;
 }
 
+/* PC向けベースフォントサイズを拡大 */
+@media (min-width: 768px) {
+  html {
+    font-size: 17px;
+  }
+}
+
 /* ブログ記事のタイポグラフィ */
 .blog-content {
   font-size: 1rem;

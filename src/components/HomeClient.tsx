@@ -134,28 +134,32 @@ export default function HomeClient({ newsItems, blogPreviews }: HomeClientProps)
               )}
             </div>
           </FadeIn>
-          <div className="mt-6 text-center text-sm text-foreground/50">
-            <p>
-              最新情報は{" "}
+          <div className="mt-8 bg-card-bg rounded-2xl p-6 shadow-sm text-center">
+            <p className="text-foreground/70 mb-4">
+              最新情報は LINE公式・X (Twitter) でもお知らせしています
+            </p>
+            <div className="flex items-center justify-center gap-4">
               <a
-                href="https://lin.ee/Jz0Vqk1"
+                href="https://lin.ee/EBGSoDF"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary hover:text-accent transition-colors font-medium"
               >
-                LINE公式
+                <img
+                  src="https://scdn.line-apps.com/n/line_add_friends/btn/ja.png"
+                  alt="友だち追加"
+                  height="36"
+                  className="h-9"
+                />
               </a>
-              {" "}・{" "}
               <a
                 href="https://x.com/yumeplan_tk"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary hover:text-accent transition-colors font-medium"
+                className="inline-flex items-center gap-2 bg-foreground text-background px-5 py-2 rounded-full text-sm font-medium hover:bg-foreground/80 transition-colors"
               >
                 X (Twitter)
               </a>
-              {" "}でもお知らせしています
-            </p>
+            </div>
           </div>
         </div>
       </section>
