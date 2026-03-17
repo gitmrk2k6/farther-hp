@@ -134,6 +134,29 @@ export default function HomeClient({ newsItems, blogPreviews }: HomeClientProps)
               )}
             </div>
           </FadeIn>
+          <div className="mt-6 text-center text-sm text-foreground/50">
+            <p>
+              最新情報は{" "}
+              <a
+                href="https://lin.ee/Jz0Vqk1"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:text-accent transition-colors font-medium"
+              >
+                LINE公式
+              </a>
+              {" "}・{" "}
+              <a
+                href="https://x.com/yumeplan_tk"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:text-accent transition-colors font-medium"
+              >
+                X (Twitter)
+              </a>
+              {" "}でもお知らせしています
+            </p>
+          </div>
         </div>
       </section>
 
